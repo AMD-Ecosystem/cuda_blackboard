@@ -1,7 +1,7 @@
 #ifndef CUDA_BLACKBOARD__CUDA_MEM_POOL_CONTEXT_HPP_
 #define CUDA_BLACKBOARD__CUDA_MEM_POOL_CONTEXT_HPP_
 
-#include <cuda_runtime.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 namespace cuda_blackboard
 {

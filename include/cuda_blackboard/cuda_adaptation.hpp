@@ -10,7 +10,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/type_adapter.hpp>
 
-#include <cuda_runtime_api.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <cstdint>
 

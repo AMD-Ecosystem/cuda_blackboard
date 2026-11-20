@@ -21,7 +21,7 @@
 
 #include <sensor_msgs/msg/point_cloud2.hpp>
 
-#include <cuda_runtime_api.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 #include <gtest/gtest.h>
 
 #include <chrono>

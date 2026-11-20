@@ -7,7 +7,7 @@
 
 #include <std_msgs/msg/u_int64.hpp>
 
-#include <cuda_runtime_api.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <memory>
 

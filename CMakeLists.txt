@@ -3,6 +3,9 @@ project(cuda_blackboard)
 
 find_package(ament_cmake_auto REQUIRED)
 find_package(CUDA)
+if(NOT ${CUDA_FOUND})
+  find_package(hip CONFIG QUIET PATHS $ENV{ROCM_PATH} /opt/rocm)
+endif()
 
 # Default to C++17
 if (NOT CMAKE_CXX_STANDARD)
@@ -23,9 +26,19 @@ if(BUILD_TESTING)
     target_include_directories(test_publish_mailbox PRIVATE include)
 endif()
 
-if(NOT ${CUDA_FOUND})
+if(NOT ${CUDA_FOUND} AND NOT hip_FOUND)
   message(WARNING "cuda was not found. the cuda_blackboard package will not be built.")
   return()
+endif()
+
+if(${CUDA_FOUND})
+  set(GPU_RUNTIME_INCLUDE_DIRS ${CUDA_INCLUDE_DIRS})
+  set(GPU_RUNTIME_LIBRARIES ${CUDA_LIBRARIES})
+else()
+  # ROCm: the CUDA runtime calls are mapped to HIP by cuda_runtime_compat.hpp.
+  message(STATUS "cuda was not found, building cuda_blackboard with HIP ${hip_VERSION}")
+  set(GPU_RUNTIME_LIBRARIES hip::host)
+  list(APPEND ${PROJECT_NAME}_CONFIG_EXTRAS cmake/cuda_blackboard-hip-extras.cmake)
 endif()
 
 ament_auto_find_build_dependencies()
@@ -33,7 +46,7 @@ ament_auto_find_build_dependencies()
 include_directories(
     include
     SYSTEM
-    ${CUDA_INCLUDE_DIRS}
+    ${GPU_RUNTIME_INCLUDE_DIRS}
 )
 
 ament_auto_add_library(cuda_blackboard SHARED
@@ -48,7 +61,7 @@ ament_auto_add_library(cuda_blackboard SHARED
 )
 
 target_link_libraries(cuda_blackboard
-    ${CUDA_LIBRARIES}
+    ${GPU_RUNTIME_LIBRARIES}
 )
 if(autoware_agnocast_wrapper_FOUND)
   autoware_agnocast_wrapper_setup(cuda_blackboard)
@@ -59,10 +72,10 @@ if(BUILD_TESTING)
 
     # These need a CUDA device at test time (skipped without one).
     ament_add_gtest(test_cuda_blackboard_publisher test/test_cuda_blackboard_publisher.cpp)
-    target_link_libraries(test_cuda_blackboard_publisher cuda_blackboard ${CUDA_LIBRARIES})
+    target_link_libraries(test_cuda_blackboard_publisher cuda_blackboard ${GPU_RUNTIME_LIBRARIES})
 
     ament_add_gtest(test_cuda_blackboard_async_publisher test/test_cuda_blackboard_async_publisher.cpp)
-    target_link_libraries(test_cuda_blackboard_async_publisher cuda_blackboard ${CUDA_LIBRARIES})
+    target_link_libraries(test_cuda_blackboard_async_publisher cuda_blackboard ${GPU_RUNTIME_LIBRARIES})
 
     if(autoware_agnocast_wrapper_FOUND)
       ament_add_gtest(test_start_worker_thread test/test_start_worker_thread.cpp

@@ -3,6 +3,9 @@
 The `cuda_blackboard` is a minimalistic implementation of the hardware acceleration in ROS enabled by [REP2007: type adaptation](https://ros.org/reps/rep-2007.html) and [REP2009: type negotiation](https://ros.org/reps/rep-2009.html).
 Although it does not require the use of additional libraries, it requires the use of NVIDIA GPUs and CUDA.
 
+AMD GPUs are also supported through HIP on ROCm: when CUDA is not found and HIP is, the package is built against HIP with the same `colcon build` command.
+For a ROCm installation outside `/opt/rocm`, pass its location with `--cmake-args -DCMAKE_PREFIX_PATH=<rocm prefix>`.
+
 ## Introduction
 
 ROS does not include the use of hardware acceleration in its original design, and nodes that implement some sort of hardware acceleration (e.g., ML models, image compression, etc) require at each step to copy the data from host to device and vice versa, limiting the benefits resulting from the acceleration.

@@ -8,7 +8,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include <cuda_runtime_api.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 namespace cuda_blackboard
 {

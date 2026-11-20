@@ -1,7 +1,7 @@
 #ifndef CUDA_BLACKBOARD__CUDA_ERROR_HPP_
 #define CUDA_BLACKBOARD__CUDA_ERROR_HPP_
 
-#include <cuda_runtime_api.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <sstream>
 #include <stdexcept>

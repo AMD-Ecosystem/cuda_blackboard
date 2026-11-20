@@ -3,7 +3,7 @@
 
 #include "cuda_blackboard/cuda_unique_ptr.hpp"
 
-#include <cuda_runtime_api.h>
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <cstddef>
 #include <cstdint>
