@@ -134,8 +134,15 @@ void CudaBlackboardSubscriber<T>::compatibleCallback(
 template <typename T>
 void CudaBlackboardSubscriber<T>::addConsumerDependencyToFreeStream() const
 {
+#if defined(__HIP_PLATFORM_AMD__)
+  // HIP: waiting on an event recorded on hipStreamLegacy crashes in hipStreamWaitEvent. The HIP
+  // null stream is the legacy default stream, so record on it instead.
+  const cudaStream_t legacy_stream = nullptr;
+#else
+  const cudaStream_t legacy_stream = cudaStreamLegacy;
+#endif
   const cudaStream_t record_stream =
-    needFallbackToLegacyDefaultStream(user_stream_) ? cudaStreamLegacy : user_stream_;
+    needFallbackToLegacyDefaultStream(user_stream_) ? legacy_stream : user_stream_;
   auto & ctx = CudaMemPoolContext::getInstance();
   cudaEvent_t event;
   CUDA_BLACKBOARD_CHECK_CUDA_ERROR(cudaEventCreateWithFlags(&event, cudaEventDisableTiming));
