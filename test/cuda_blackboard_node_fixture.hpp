@@ -15,13 +15,13 @@
 #pragma once
 
 #include "cuda_blackboard/cuda_pointcloud2.hpp"
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 #include "cuda_test_utils.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 
 #include <sensor_msgs/msg/point_cloud2.hpp>
 
-#include "cuda_blackboard/cuda_runtime_compat.hpp"
 #include <gtest/gtest.h>
 
 #include <chrono>

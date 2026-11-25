@@ -1,9 +1,8 @@
 #ifndef CUDA_MESSAGE_IMPL_DETAIL_HPP_
 #define CUDA_MESSAGE_IMPL_DETAIL_HPP_
 
-#include "cuda_blackboard/cuda_unique_ptr.hpp"
-
 #include "cuda_blackboard/cuda_runtime_compat.hpp"
+#include "cuda_blackboard/cuda_unique_ptr.hpp"
 
 #include <cstddef>
 #include <cstdint>

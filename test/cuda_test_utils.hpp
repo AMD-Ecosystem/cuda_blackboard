@@ -15,6 +15,7 @@
 #pragma once
 
 #include "cuda_blackboard/cuda_runtime_compat.hpp"
+
 #include <gtest/gtest.h>
 
 namespace cuda_blackboard::test

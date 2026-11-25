@@ -2,12 +2,12 @@
 
 #pragma once
 
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
+
 #include <negotiated/negotiated_subscription.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include <std_msgs/msg/u_int64.hpp>
-
-#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <memory>
 

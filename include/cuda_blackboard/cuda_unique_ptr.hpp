@@ -22,7 +22,6 @@
 
 #include "cuda_blackboard/cuda_error.hpp"
 #include "cuda_blackboard/cuda_mem_pool_context.hpp"
-
 #include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <cstddef>

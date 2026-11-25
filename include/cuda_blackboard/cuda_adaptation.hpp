@@ -5,12 +5,11 @@
 #include "cuda_blackboard/cuda_image.hpp"
 #include "cuda_blackboard/cuda_mem_pool_context.hpp"
 #include "cuda_blackboard/cuda_pointcloud2.hpp"
+#include "cuda_blackboard/cuda_runtime_compat.hpp"
 #include "cuda_blackboard/cuda_unique_ptr.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/type_adapter.hpp>
-
-#include "cuda_blackboard/cuda_runtime_compat.hpp"
 
 #include <cstdint>
 
