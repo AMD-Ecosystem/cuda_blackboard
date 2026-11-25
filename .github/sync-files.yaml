@@ -15,6 +15,7 @@
     - source: .yamllint.yaml
     - source: CPPLINT.cfg
     - source: setup.cfg
+    - source: codecov.yaml
     - source: .github/workflows/build-and-test.yaml
     - source: .github/workflows/build-and-test-differential.yaml
     - source: .github/workflows/cancel-previous-workflows.yaml
@@ -23,6 +24,7 @@
 - repository: autowarefoundation/autoware.universe
   files:
     - source: .github/cppcheck-problem-matcher.json
-    - source: .github/workflows/cppcheck-weekly.yaml
+    - source: .github/workflows/cppcheck.yaml
     - source: .github/workflows/cppcheck-differential.yaml
     - source: .cppcheck_suppressions
+    - source: .cppcheck_macros.cfg
